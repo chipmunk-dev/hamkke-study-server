@@ -1,6 +1,8 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import swaggerUi from 'swagger-ui-express';
-import swaggerDocument from '../swagger.json';
+
+import swaggerSpec from './swagger';
+import rootRouter from './route';
 import AppDataSource from './db/db';
 import redisClient from './db/redis';
 import { env } from './const/env';
@@ -9,11 +11,9 @@ const app = express();
 const port = env.SERVER_PORT;
 
 app.use(express.json());
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-app.get('/', (_req: Request, res: Response) => {
-  return res.sendStatus(200);
-});
+app.use('/', rootRouter);
 
 async function start() {
   await AppDataSource.initialize().then(() => {
