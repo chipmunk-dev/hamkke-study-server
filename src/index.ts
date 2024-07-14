@@ -11,8 +11,8 @@ const port = env.SERVER_PORT;
 app.use(express.json());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.get('/', (req: Request, res: Response) => {
-  return res.send('Hello, TypeScript with Express!');
+app.get('/', (_req: Request, res: Response) => {
+  return res.sendStatus(200);
 });
 
 async function start() {
@@ -30,3 +30,5 @@ async function start() {
 }
 
 start();
+
+export default app;
