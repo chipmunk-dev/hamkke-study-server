@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
-import { env } from './const/env';
+import { env } from '../const/env';
+import { join } from 'path';
 
 type DatabaseType = 'mysql' | 'postgres' | 'mongodb';
 
@@ -11,7 +12,7 @@ const AppDataSource = new DataSource({
   username: env.DB_USERNAME,
   password: env.DB_PASSWORD,
   database: env.DB_DATABASE,
-  entities: [],
+  entities: [join(__dirname, '../**/*.entity.{ts,js}')],
   synchronize: true,
   logging: false,
 });
