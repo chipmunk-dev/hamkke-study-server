@@ -1,11 +1,15 @@
 import express, { Request, Response } from 'express';
-import AppDataSource from './db';
-import redisClient from './redis';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from '../swagger.json';
+import AppDataSource from './db/db';
+import redisClient from './db/redis';
+import { env } from './const/env';
 
 const app = express();
-const port = 3000;
+const port = env.SERVER_PORT;
 
 app.use(express.json());
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get('/', (req: Request, res: Response) => {
   return res.send('Hello, TypeScript with Express!');
