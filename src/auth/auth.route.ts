@@ -73,7 +73,6 @@ const router = Router();
  *       409:
  *         description: 이미 존재하는 이메일
  */
-
 router.post(
   '/login/email',
   BasicGuard,

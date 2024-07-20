@@ -4,6 +4,7 @@ dotenv.config();
 
 export const env = {
   SERVER_PORT: Number(process.env.SERVER_PORT),
+  MORGAN_PRESET: `${process.env.MORGAN_PRESET}`,
   REDIS_HOST: `${process.env.REDIS_HOST}`,
   DB_TYPE: `${process.env.DB_TYPE}`,
   DB_HOST: `${process.env.DB_HOST}`,
